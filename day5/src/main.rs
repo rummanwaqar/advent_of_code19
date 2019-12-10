@@ -48,11 +48,6 @@ fn intcode_computer(mut program: Vec<i32>) {
 
                     }
                 }
-                if op == 1 {
-                    
-                } else if op == 2 {
-                    
-                }
                 pointer += 4; 
             }
             3 => { // input
