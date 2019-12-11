@@ -14,48 +14,36 @@ fn is_increasing(password : std::string::String) -> bool {
 
 fn contains_adjacent_pair(password : std::string::String) -> bool {
     let mut previous = 'a';
-    let mut two_in_row = false;
+    let mut current_count = 1;
     for x in password.chars() {
         if previous != 'a' {
             if previous == x {
-                two_in_row = !two_in_row;
+                current_count += 1;
+            } else {
+                if current_count == 2 {
+                    return true;
+                }
+                current_count = 1;
             }
         }
         previous = x;
     }
-    two_in_row
+    if current_count == 2 {
+        return true;
+    }
+    false
 }
 
 // count number of possible passwords
 fn count_passwords(start_range : u32, end_range : u32) -> u32 {
-    println!("{}", contains_adjacent_pair("123344".to_string()));
-    // for password in start_range..end_range {
-    //     // 1063
-    //     let chars :  = password.chars();
-    //     is_increasing(password.to_string());
-    //     contains_adjacent_pair(password.to_string());
-    //     // is_increasing(password.to_string());
-    //     // 
-    //     // let mut previous : char = 'a';
-    //     // let mut has_double = false;
-    //     // let mut is_inc = true;
-    //     // for x in password.to_string().chars() {
-    //     //     if previous != 'a' {
-    //     //         if previous == x {
-    //     //             has_double = true;
-    //     //         }
-    //     //         if x < previous {
-    //     //             is_inc = false;
-    //     //             break;
-    //     //         }
-    //     //     }
-    //     //     previous = x;
-    //     // }
-    //     // if is_inc && has_double {
-    //     //     count += 1;
-    //     // }
-    // }
-    123
+    let mut count = 0;
+    for password in start_range..end_range {
+        if is_increasing(password.to_string()) && 
+            contains_adjacent_pair(password.to_string()) {
+                count += 1;
+            }
+        }
+    count
 }
 
 fn main() {
